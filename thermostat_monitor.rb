@@ -39,7 +39,7 @@ class ThermostatMonitor
     if @thermostats
       @thermostats.each do |t|
         if t.successfulUpdate
-          thermostats << hash["thermostats"] = t.to_hash
+          thermostats <<  t.to_hash
         end
       end
       hash["thermostats"] = thermostats
