@@ -50,13 +50,12 @@ class ThermostatMonitor
   def checkin
     tmData = []
     url = API_URL + '?apiKey=' + API_KEY + '&action=checkin'
-    loadThermostats
     @thermostats.each do |t|
       t.update
     end
     uri = URI.parse(url)
     req = Net::HTTP::Post.new(uri.request_uri)
-    req.set_form_data(loadHashData)
+    req.body = loadHashData.to_json
     req.content_type = "application/json"
     res = Net::HTTP.start(uri.host, uri.port) do |http|
       http.request(req)
@@ -73,14 +72,15 @@ class ThermostatMonitor
 end
 
 tm = ThermostatMonitor.new
+tm.loadThermostats
 
 while true do
 begin
- puts "trying to checkin"
+ puts "checking in"
  tm.checkin
 rescue => e
 puts e.message
 end
-p tm.weather
+puts "outside temp: #{tm.weather.temperature}, inside: #{tm.thermostats.first.temperature}, state: #{tm.thermostats.first.state}" rescue nil
 sleep 60
 end

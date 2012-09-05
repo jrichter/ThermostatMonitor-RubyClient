@@ -23,7 +23,7 @@ class Thermostat
   end
 
   def to_hash
-    hash = {"state" => self.state, "temperature" => self.temperature, "ipAddress" => self.ipAddress}
+    hash = {"state" => self.state, "temperature" => self.temperature.to_i, "ipAddress" => self.ipAddress}
   end
 
   private
