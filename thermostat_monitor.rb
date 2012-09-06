@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'open-uri'
-require 'net/http'
+require 'httparty'
 require 'json'
 require 'yaml'
 require './thermostat'
@@ -53,13 +53,9 @@ class ThermostatMonitor
     @thermostats.each do |t|
       t.update
     end
-    uri = URI.parse(url)
-    req = Net::HTTP::Post.new(uri.request_uri)
-    req.body = loadHashData.to_json
-    req.content_type = "application/json"
-    res = Net::HTTP.start(uri.host, uri.port) do |http|
-      http.request(req)
-    end
+    res = HTTParty.post(url,
+                        :body => loadHashData.to_json,
+                        :headers => { 'Content-Type' => 'application/json' } )
     tmData = JSON.parse(res.body)
     if @weather
       @weather.update(tmData["zip"], tmData["outsideTemperature"])

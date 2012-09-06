@@ -2,3 +2,4 @@
 .projectile
 .#*
 api_key.yml
+*.log
