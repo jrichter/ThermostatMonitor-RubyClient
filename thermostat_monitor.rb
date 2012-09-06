@@ -70,17 +70,3 @@ class ThermostatMonitor
   end
 
 end
-
-tm = ThermostatMonitor.new
-tm.loadThermostats
-
-while true do
-begin
- puts "checking in"
- tm.checkin
-rescue => e
-puts e.message
-end
-puts "outside temp: #{tm.weather.temperature}, inside: #{tm.thermostats.first.temperature}, state: #{tm.thermostats.first.state}" rescue nil
-sleep 60
-end
