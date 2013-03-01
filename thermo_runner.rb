@@ -17,5 +17,5 @@ while true do
   if tm.thermostats.first.error != "no errors"
     tm.thermostats.first.error = "no errors"
   end
-  sleep 300
+  sleep 150
 end
