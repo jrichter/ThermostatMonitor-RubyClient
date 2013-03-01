@@ -1,9 +1,11 @@
 #!/usr/bin/ruby
 
+PATH = File.dirname(File.expand_path(__FILE__))
+
 class LogFile
   attr_accessor :filename, :path, :filepath
 
-  def initialize(filename, path="./")
+  def initialize(filename, path=PATH)
     @filename = filename
     @path = path
     @filepath = File.join(path, filename)

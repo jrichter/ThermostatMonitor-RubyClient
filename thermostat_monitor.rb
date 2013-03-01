@@ -4,13 +4,13 @@ require 'open-uri'
 require 'httparty'
 require 'json'
 require 'yaml'
-require './thermostat'
+require_relative 'thermostat'
 
 class ThermostatMonitor
   attr_reader :thermostats, :weather
 
   API_URL = 'http://api.thermostatmonitor.com/json/'
-  API_KEY = YAML::load_file("api_key.yml")["key"]
+  API_KEY = YAML::load_file(File.join(File.dirname(File.expand_path(__FILE__)), "api_key.yml"))["key"]
 
   def loadThermostats
     tmData = []

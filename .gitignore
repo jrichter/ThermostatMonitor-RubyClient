@@ -1,5 +1,7 @@
+Gemfile.lock
 .rvmrc
 .projectile
 .#*
 api_key.yml
 *.log
+*.pid
